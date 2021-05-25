@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zds.easybuy_demo.mapper.ProductMapper">
+
+    <select id="selectByLevelId" resultType="com.zds.easybuy_demo.entity.Product">
+        select * from easybuy_product
+        <where>
+            <if test="Level1Id!=null and Level1Id!=''">
+                categoryLevel1Id=#{Level1Id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectLikeName" resultType="com.zds.easybuy_demo.entity.Product">
+        select * from easybuy_product
+        <where>
+            <if test="name!=null and name!='' and name!='null'">
+                `name` like concat("%",#{name},"%")
+            </if>
+            <if test="type!=null and type!='' and type!=0">
+                <if test="type==1">
+                    <if test="id!=null and id!='' and id!=0">
+                        categoryLevel1Id=#{id}
+                    </if>
+                </if>
+                <if test="type==2">
+                    <if test="id!=null and id!='' and id!=0">
+                        categoryLevel2Id=#{id}
+                    </if>
+                </if>
+                <if test="type==3">
+                    <if test="id!=null and id!='' and id!=0">
+                        categoryLevel3Id=#{id}
+                    </if>
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="updateStock" resultType="integer">
+        update easybuy_product set stock=#{quantity} where id=#{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,33 @@
+#端口配置
+server:
+  port: 8081
+#jdbc配置
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/easybuy?characterEncoding=utf-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    default-property-inclusion: non_null
+#mybatic配置
+mybatis:
+  mapper-locations: classpath:mapping/*Mapping.xml
+  type-aliases-package: com.zds.easybuy_demo.entity
+
+#showSql
+logging:
+  level:
+    root: info
+  file:
+    path: D:\idea_logs2021
+#    com:
+#      example:
+#        mapper:debug
+
+#pagehelper分页配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
